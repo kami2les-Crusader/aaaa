@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>ToDo詳細</title>
+</head>
+<body>
+  <h1>ToDo詳細</h1>
+
+  <p><strong>日付：</strong>
+	<span th:text="${todo.date}"></span></p>
+  <p><strong>タイトル：</strong>
+	<span th:text="${todo.title}"></span></p>
+  <p><strong>メモ：</strong>
+	<span th:text="${todo.memo}"></span></p>
+
+  <a th:href="@{/todo(date=${todo.date})}">← ToDoリストに戻る</a>
+</body>
+</html>

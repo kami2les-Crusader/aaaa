@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>カレンダー</title>
+</head>
+
+<body>
+
+	<!-- 年月ナビゲーション -->
+	<a th:href="@{/(year=${prevYear}, month=${prevMonth})}">← 前月</a>
+	<h1 th:text="${year} + '年' + ${month} + '月'">	</h1>
+	<a th:href="@{/(year=${nextYear}, month=${nextMonth})}">次月 →</a>
+
+	<div style="display:flex; gap:40px; align-items:flex-start;">
+
+		<table border="1">
+			<tr>
+				<th>日</th>
+				<th>月</th>
+				<th>火</th>
+				<th>水</th>
+				<th>木</th>
+				<th>金</th>
+				<th>土</th>
+			</tr>
+			<tr th:each="week : ${weeks}">
+				<td th:each="day : ${week}">
+					<a th:if="${day != null}" th:href="@{/todo(date=${day})}"
+						th:text="${day.substring(day.lastIndexOf('-') + 1)}" </a>
+				</td>
+			</tr>
+			</table>
+
+		<div>
+			<h2 th:text="${todayStr} + ' の ToDo'"></h2>
+			<p th:if="${todayTodos.isEmpty()}">今日のToDoはありません</p>
+			<ul>
+				<li th:each="todo : ${todayTodos}">
+					<a th:href="@{/todo/detail(id=${todo.id})}" th:text="${todo.title}">
+					</a>
+				</li>
+			</ul>
+			<a th:href="@{/todo(date=${todayStr})}">今日のToDoリストへ →</a>
+		</div>
+
+	</div>
+
+
+</body>
+
+</html>

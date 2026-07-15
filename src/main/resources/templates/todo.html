@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>ToDoリスト</title>
+</head>
+<body>
+  <h1 th:text="${date} + ' のToDoリスト'"></h1>
+
+  <p th:if="${todos.isEmpty()}">まだToDoはありません</p>
+  <ul>
+	<li th:each="todo : ${todos}">
+	  <a th:href="@{/todo/detail(id=${todo.id})}"
+	     th:text="${todo.title}">
+	  </a>
+	  <a th:href="@{/todo/delete-confirm(id=${todo.id}, date=${date})}">🗑 削除</a>
+	</li>
+  </ul>
+
+  <a th:href="@{/todo/new(date=${date})}">＋ 新規作成</a><br>
+  <a href="/">← カレンダーに戻る</a>
+</body>
+</html>
