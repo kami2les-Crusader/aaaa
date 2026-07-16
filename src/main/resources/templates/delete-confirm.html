@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>削除確認</title>
+</head>
+<body>
+  <h1>本当に削除しますか？</h1>
+
+  <p><strong>タイトル：</strong><span th:text="${todo.title}"></span></p>
+  <p><strong>メモ：</strong><span th:text="${todo.memo}"></span></p>
+
+  <a th:href="@{/todo(date=${todo.date})}">← キャンセル</a>
+</body>
+</html>
