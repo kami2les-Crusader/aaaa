@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import jp.levtech.rookie.tutorial.model.Todo;
-
 @Controller
 public class TodoController {
 
@@ -98,28 +97,28 @@ public class TodoController {
 	// 削除確認画面
 	@GetMapping("/todo/delete-confirm")
 	public String deleteConfirm(@RequestParam int id, Model model) {
-	    Todo todo = todoList.stream()
-	            .filter(t -> t.getId() == id)
-	            .findFirst()
-	            .orElse(null);
+		Todo todo = todoList.stream()
+				.filter(t -> t.getId() == id)
+				.findFirst()
+				.orElse(null);
 
-	    model.addAttribute("todo", todo);
-	    return "delete-confirm";
+		model.addAttribute("todo", todo);
+		return "delete-confirm";
 	}
-	
-//削除画面
+
+	//削除画面
 	@PostMapping("/todo/delete")
 	public String delete(@RequestParam int id, @RequestParam String date) {
-	    todoList.removeIf(t -> t.getId() == id);
-	    return "redirect:/todo/deleted?date=" + date;
+		todoList.removeIf(t -> t.getId() == id);
+		return "redirect:/todo/deleted?date=" + date;
 	}
 
 	@GetMapping("/todo/deleted")
 	public String deleted(@RequestParam String date, Model model) {
-	    model.addAttribute("date", date);
-	    return "delete";
+		model.addAttribute("date", date);
+		return "delete";
 	}
-	
+
 	private List<List<String>> buildCalendar(int year, int month) {
 		YearMonth ym = YearMonth.of(year, month);
 		LocalDate firstDay = ym.atDay(1);
